@@ -1,11 +1,336 @@
 <!doctype html>
-<html>
+<html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <title>生活情境日语图解</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="日語學習 PDF 收藏：生活情境圖解與地表最強日語會話。"
+    />
+    <title>日語學習書庫</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #24302d;
+        --muted: #727c77;
+        --paper: #fbf8f1;
+        --card: #fffefa;
+        --accent: #bd6148;
+        --line: #e9e3d8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(ellipse at 88% 3%, #f2e4d5 0, transparent 27rem),
+          var(--paper);
+        font-family:
+          "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans TC",
+          "Microsoft JhengHei", sans-serif;
+        line-height: 1.6;
+      }
+
+      .page {
+        width: min(1080px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 68px 0 48px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0 0 16px;
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 24px;
+        height: 1px;
+        background: currentColor;
+        content: "";
+      }
+
+      h1 {
+        max-width: 650px;
+        margin: 0;
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: clamp(2.3rem, 6vw, 4.25rem);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+      }
+
+      .intro {
+        max-width: 570px;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 54px 0 18px;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+      }
+
+      .count {
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .library {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+        gap: 18px;
+      }
+
+      .book {
+        position: relative;
+        display: flex;
+        min-height: 250px;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--card);
+        box-shadow: 0 8px 26px rgb(52 45 33 / 4%);
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .book:hover {
+        transform: translateY(-3px);
+        border-color: #d8c9b8;
+        box-shadow: 0 14px 34px rgb(52 45 33 / 9%);
+      }
+
+      .book::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--book-color, #8d9b82);
+        content: "";
+      }
+
+      .book--conversation {
+        --book-color: #bd6148;
+      }
+
+      .book--illustrated {
+        --book-color: #728a78;
+      }
+
+      .book--everyday {
+        --book-color: #c49a55;
+      }
+
+      .book-label {
+        margin: 0 0 13px;
+        color: var(--book-color);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+      }
+
+      .book h3 {
+        margin: 0;
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      .book-description {
+        margin: 11px 0 22px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .book-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 9px 0;
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .book-link::after {
+        color: var(--book-color);
+        content: "↗";
+        font-size: 1.1rem;
+        transition: transform 180ms ease;
+      }
+
+      .book-link:hover::after {
+        transform: translate(2px, -2px);
+      }
+
+      .book-link:focus-visible {
+        border-radius: 3px;
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+
+      footer {
+        margin-top: 54px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 600px) {
+        .page {
+          width: min(100% - 32px, 480px);
+          padding-top: 44px;
+        }
+
+        .section-heading {
+          margin-top: 40px;
+        }
+
+        .book {
+          min-height: 225px;
+          padding: 23px;
+        }
+
+        footer {
+          margin-top: 38px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>生活情境日语图解</h1>
-    <a href="./seikatsu-japanese.pdf">生活情境日语图解</a>
+    <main class="page">
+      <header>
+        <p class="eyebrow">Japanese learning library</p>
+        <h1>日語學習書庫</h1>
+        <p class="intro">
+          收好喜歡的日語教材，從生活情境到實用會話，慢慢累積每天一點點的進步。
+        </p>
+      </header>
+
+      <section aria-labelledby="collection-title">
+        <div class="section-heading">
+          <h2 id="collection-title">我的教材</h2>
+          <span class="count">共 6 份</span>
+        </div>
+
+        <div class="library">
+          <article class="book book--conversation">
+            <p class="book-label">會話練習 · P1–200</p>
+            <h3>地表最強日語會話 15000</h3>
+            <p class="book-description">第 1–200 頁，共 200 頁。</p>
+            <a
+              class="book-link"
+              href="./地表最強日語會話15000_P1-200.pdf"
+              target="_blank"
+              rel="noopener"
+            >開啟 PDF</a>
+          </article>
+
+          <article class="book book--conversation">
+            <p class="book-label">會話練習 · P201–400</p>
+            <h3>地表最強日語會話 15000</h3>
+            <p class="book-description">第 201–400 頁，共 200 頁。</p>
+            <a
+              class="book-link"
+              href="./地表最強日語會話15000_P201-400.pdf"
+              target="_blank"
+              rel="noopener"
+            >開啟 PDF</a>
+          </article>
+
+          <article class="book book--conversation">
+            <p class="book-label">會話練習 · P401–600</p>
+            <h3>地表最強日語會話 15000</h3>
+            <p class="book-description">第 401–600 頁，共 200 頁。</p>
+            <a
+              class="book-link"
+              href="./地表最強日語會話15000_P401-600.pdf"
+              target="_blank"
+              rel="noopener"
+            >開啟 PDF</a>
+          </article>
+
+          <article class="book book--conversation">
+            <p class="book-label">會話練習 · P601–800</p>
+            <h3>地表最強日語會話 15000</h3>
+            <p class="book-description">第 601–800 頁，共 200 頁。</p>
+            <a
+              class="book-link"
+              href="./地表最強日語會話15000_P601-800.pdf"
+              target="_blank"
+              rel="noopener"
+            >開啟 PDF</a>
+          </article>
+
+          <article class="book book--conversation">
+            <p class="book-label">會話練習 · P801–835</p>
+            <h3>地表最強日語會話 15000</h3>
+            <p class="book-description">第 801–835 頁，共 35 頁。</p>
+            <a
+              class="book-link"
+              href="./地表最強日語會話15000_P801-835.pdf"
+              target="_blank"
+              rel="noopener"
+            >開啟 PDF</a>
+          </article>
+
+          <article class="book book--everyday">
+            <p class="book-label">生活日語 · 圖解學習</p>
+            <h3>生活情境日語圖解</h3>
+            <p class="book-description">透過生活場景與圖解，輕鬆認識實用日語。</p>
+            <a
+              class="book-link"
+              href="./seikatsu-japanese.pdf"
+              target="_blank"
+              rel="noopener"
+            >開啟 PDF</a>
+          </article>
+        </div>
+      </section>
+
+      <footer>挑一本教材，開始今天的日語練習。</footer>
+    </main>
   </body>
 </html>
